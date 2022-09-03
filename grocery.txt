@@ -1,0 +1,12 @@
+{
+'1':['Egg price 20 Rs','20'],
+'2':['Fish price 400Rs/Kg','400'],
+'3':['Beef price 550R/Kg','550'],
+'4':['Flour price 90Rs/Kg','90'],
+'5':['Milk price 90Rs/Kg','90'],
+'6':['Bread price 100Rs','100'],
+'7':['Oil price 200Rs/Kg','200'],
+'8':['Sugar price 95Rs/Bag','95'],
+'9':['Salt price 25Rs/Bag','25'],
+'10':['Butter price 250Rs/Box','250']
+}
