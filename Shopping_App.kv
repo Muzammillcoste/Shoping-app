@@ -1,0 +1,1003 @@
+ScreenManager:
+    LoginWindow:
+    SignupWindow:
+    MainWindow:
+    GrossWindow:
+    ElectWindow:
+    FashionWindow:
+    PaymentWindow:
+
+<SignupWindow>:
+    name:'Signup'
+    Image:
+        source:'blue.png'
+        allow_stretch:True
+        keep_ratio:False
+    MDCard:
+        size_hint:None,None
+        size:300,525
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        elevation:10
+        padding:25
+        spacing:25
+        orientation:'vertical'
+        MDLabel:
+            text:"'WALMART' Signup"
+            font_size:40
+            font_name:'Auto Rich.ttf'  
+            halign:'center'
+            size_hint_y:None   
+            height:self.texture_size[1]
+        MDTextField:
+            id:Name
+            hint_text:'Name'
+            helper_text_mode:'on_focus'
+            icon_right_color: app.theme_cls.primary_color
+            icon_right:'account'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/1.75
+        MDTextField:
+            id:Email
+            hint_text:'Email'
+            helper_text_mode:'on_focus'
+            icon_right_color: app.theme_cls.primary_color
+            text_hint:'Email'
+            icon_right:'email'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2
+        MDTextField:
+            id:Password
+            hint_text:'Password'
+            helper_text_mode:'on_focus'
+            icon_right_color: app.theme_cls.primary_color
+            icon_right:'eye-off'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            password:True
+            pos:root.width/3,root.height/2.3
+        MDTextField:
+            id:Phone_Number
+            hint_text:'Phone number'
+            helper_text_mode:'on_focus'
+            icon_right_color: app.theme_cls.primary_color
+            icon_right:'phone'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2.8
+        MDRoundFlatButton:
+            text: 'Login'
+            font_size:18
+            pos_hint:{'center_x':0.5}
+            size:'100dp','50dp'
+            on_release:
+                app.root.current='Login'
+                root.manager.transition.direction='right'
+        MDRoundFlatButton:
+            text: 'Submit'
+            font_size:18
+            pos_hint:{'center_x':0.5}
+            size:'100dp','50dp'
+            on_release:
+                app.root.current='Signup'
+                root.manager.transition.direction='right'
+                root.Submit_signup_func(Name.text,Email.text,Password.text,Phone_Number.text)
+
+<LoginWindow>:
+    name:'Login'
+    Image:
+        source:'blue.png'
+        allow_stretch:True
+        keep_ratio:False
+        cols: 1
+        MDToolbar:
+            title: "Login"
+            left_action_items: [["menu",lambda x: app.main_menu_dialog(Email.text,Password.text)]]
+    MDCard:
+        size_hint:None,None
+        size:300,380
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        elevation:10
+        padding:25
+        spacing:25
+        orientation:'vertical'
+        MDLabel:
+            text:"'WALMART' Login"
+            font_size:40
+            font_name:'Auto Rich.ttf'  
+            halign:'center'
+            size_hint_y:None   
+            height:self.texture_size[1]
+        MDTextField:
+            id:Email
+            hint_text:'Email'
+            helper_text_mode:'on_focus'
+            icon_right_color: app.theme_cls.primary_color
+            icon_right:'email'
+            size_hint:None,None
+            icon_right_color: app.theme_cls.primary_color
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2
+            pos:root.width/3,root.height/2
+        MDTextField:
+            id:Password
+            hint_text:'Password'
+            helper_text_mode:'on_focus'
+            icon_right:'eye-off'
+            size_hint:None,None
+            icon_right_color: app.theme_cls.primary_color
+            multiline: False
+            size:'250dp','30dp'
+            password:True
+            pos:root.width/3,root.height/2.3
+        MDRoundFlatButton:
+            text: 'Login'
+            font_size:18
+            pos_hint:{'center_x':0.5}
+            size:'100dp','50dp'
+            on_state:
+                if bool(root.Log_in_func(Email.text,Password.text)):\
+                root.manager.transition.direction='right';\
+                app.root.current="Main"
+        MDRoundFlatButton:
+            text: 'Signup'
+            font_size:18
+            pos_hint:{'center_x':0.5}
+            size:'100dp','50dp'
+            on_release:
+                app.root.current='Signup'
+                root.manager.transition.direction='right'
+
+        
+<MainWindow>:
+    name:'Main'
+    Image:
+        source:'blue.png'
+        allow_stretch:True
+        keep_ratio:False
+    MDGridLayout:
+
+        BoxLayout:
+            color:0,0,1,1
+            orientation:'horizontal'
+            spacing:'30dp'
+            padding:'230dp'
+            MDFillRoundFlatButton:
+                text: 'Grossery'
+                font_size:18    
+                on_release:
+                    app.root.current='Gross'
+                    root.manager.transition.direction='right'
+                color:(0,0,1,.5)
+            MDFillRoundFlatButton:
+                text: 'Electronics'
+                font_size:18
+                on_release:
+                    app.root.current='Elect'
+                    root.manager.transition.direction='right'
+            MDFillRoundFlatButton:
+                text: 'Fashion'
+                font_size:18
+                on_release:
+                    app.root.current='Fashion'
+                    root.manager.transition.direction='right'
+
+<GrossWindow>:
+    name:'Gross'
+    Image:
+        source:'gross.jpg'
+        allow_stretch:True
+        keep_ratio:False
+    MDGridLayout:
+        cols: 1
+        MDToolbar:      
+            title: "Grossery"
+            left_action_items: [["menu",lambda x: app.menu_dialog()]]
+            right_action_items: [["cart",lambda x: app.navigation_draw()]]           
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:40,400
+                elevation:6
+                Image:
+                    source:'egg.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_egg()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:egg
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:180,400
+                elevation:6
+                Image:
+                    source:'fish.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_fish()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:fish
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:320,400
+                    elevation:6
+                    Image:
+                        source:'beef.jpg'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_beef()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:beef
+                        size_hint:None,None
+                        size:50,10
+                        pos_hint:{'center_x':.3}                   
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:460,400
+                    elevation:6
+                    Image:
+                        source:'flour.jpg'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_flour()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:flour
+                        size_hint:None,None
+                        size:50,5
+                        pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,400
+                        elevation:6
+                        Image:
+                            source:'milk.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_milk()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:milk
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:40,230
+                        elevation:6
+                        Image:
+                            source:'bread.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_bread()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:bread
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                            hint_text:'Quantity'
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:180,230
+                        elevation:6
+                        Image:
+                            source:'oil.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_oil()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:oil
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:320,230
+                        elevation:6
+                        Image:
+                            source:'sugar.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_sugar()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:sugar
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:460,230
+                        elevation:6
+                        Image:
+                            source:'salt.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_salt()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:salt
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,230
+                        elevation:6
+                        Image:
+                            source:'butter.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_butter()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:butter
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:40,50
+                        pos:10,70
+                        elevation:6
+                        MDFillRoundFlatButton:
+                            text:"back"
+                            size_hint_y:1
+                            size_hint_x:1
+                            on_release:
+                                app.root.current='Main'
+                                root.manager.transition.direction='right'
+        MDBottomAppBar:
+            MDToolbar:
+                mode: "end"
+                type: "bottom"
+                icon: "credit-card"
+                on_action_button: root.manager.current = "Payment"
+<ElectWindow>:
+    name:'Elect'
+    Image:
+        source:'electronics.jpg'
+        allow_stretch:True
+        keep_ratio:False
+    MDGridLayout:
+        cols: 1
+        MDToolbar:      
+            title: "Electronics"
+            left_action_items: [["menu",lambda x: app.menu_dialog()]]
+            right_action_items: [["cart",lambda x: app.navigation_draw()]]       
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:40,400
+                elevation:6
+                Image:
+                    source:'mac book.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_mac()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:mac_book
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:180,400
+                elevation:6
+                Image:
+                    source:'bulb.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_bulb()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:bulb
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:320,400
+                    elevation:6
+                    Image:
+                        source:'fan.jpg'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_fan()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:fan
+                        size_hint:None,None
+                        size:50,5
+                        pos_hint:{'center_x':.3}
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:460,400
+                    elevation:6
+                    Image:
+                        source:'fridge.jpg'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_fridge()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:fridge
+                        size_hint:None,None
+                        size:50,5
+                        pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,400
+                        elevation:6
+                        Image:
+                            source:'iphne.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_iphone()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:iphone
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:40,230
+                        elevation:6
+                        Image:
+                            source:'led.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_led()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:led
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:180,230
+                        elevation:6
+                        Image:
+                            source:'oven.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_oven()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:oven
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:320,230
+                        elevation:6
+                        Image:
+                            source:'samsung.png'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_samsung()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:samsung
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:460,230
+                        elevation:6
+                        Image:
+                            source:'washing machine.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_wash_machine()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:washing_machine
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,230
+                        elevation:6
+                        Image:
+                            source:'air.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_air()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:air_conditioner
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                    FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:40,50
+                        pos:10,70
+                        elevation:6
+                        MDFillRoundFlatButton:
+                            text:"back"
+                            size_hint_y:1
+                            size_hint_x:1
+                            on_release:
+                                app.root.current='Main'
+                                root.manager.transition.direction='right'
+        MDBottomAppBar:
+            MDToolbar:
+                mode: "end"
+                type: "bottom"
+                icon: "credit-card"
+                on_action_button: root.manager.current = "Payment"
+
+
+
+<FashionWindow>:
+    name:'Fashion'
+    Image:
+        source:'fashion.jpg'
+        allow_stretch:True
+        keep_ratio:False
+    MDGridLayout:
+        cols: 1
+        MDToolbar:      
+            title: "Fashion"
+            left_action_items: [["menu",lambda x: app.menu_dialog()]]
+            right_action_items: [["cart",lambda x: app.navigation_draw()]]           
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:40,400
+                elevation:6
+                Image:
+                    source:'body spray.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_body()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:body_spray
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+        FloatLayout:
+            MDCard:
+                orientation:'vertical'
+                size_hint:None,None
+                size:120,120
+                pos:180,400
+                elevation:6
+                Image:
+                    source:'face wash.jpg'
+                    size_hint_y:.8
+                    allow_stretch:True
+                    keep_ratio:False
+                MDFillRoundFlatButton:
+                    text:"Add to cart"
+                    on_press: app.add_to_cart_face()
+                    size_hint_y:.2
+                MDTextFieldRound:
+                    id:face_wash
+                    size_hint:None,None
+                    size:50,5
+                    pos_hint:{'center_x':.3}
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:320,400
+                    elevation:6
+                    Image:
+                        source:'hair gel.jpg'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_hair()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:hair_gel
+                        size_hint:None,None
+                        size:50,5
+                        pos_hint:{'center_x':.3}
+            FloatLayout:
+                MDCard:
+                    orientation:'vertical'
+                    size_hint:None,None
+                    size:120,120
+                    pos:460,400
+                    elevation:6
+                    Image:
+                        source:'lipstick.png'
+                        size_hint_y:.8
+                        allow_stretch:True
+                        keep_ratio:False
+                    MDFillRoundFlatButton:
+                        text:"Add to cart"
+                        on_press: app.add_to_cart_lip()
+                        size_hint_y:.2
+                    MDTextFieldRound:
+                        id:lip_stick
+                        size_hint:None,None
+                        size:50,5
+                        pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,400
+                        elevation:6
+                        Image:
+                            source:'pant.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_pant()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:pant
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:40,230
+                        elevation:6
+                        Image:
+                            source:'perfume.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_perfume()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:perfume
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:180,230
+                        elevation:6
+                        Image:
+                            source:'shirt.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_shirt()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:shirt
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:320,230
+                        elevation:6
+                        Image:
+                            source:'shoes.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_shoes()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:shoes
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:460,230
+                        elevation:6
+                        Image:
+                            source:'watch.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_watch()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:watch
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:120,120
+                        pos:600,230
+                        elevation:6
+                        Image:
+                            source:'cap.jpg'
+                            size_hint_y:.8
+                            allow_stretch:True
+                            keep_ratio:False
+                        MDFillRoundFlatButton:
+                            text:"Add to cart"
+                            on_press: app.add_to_cart_cap()
+                            size_hint_y:.2
+                        MDTextFieldRound:
+                            id:cap
+                            size_hint:None,None
+                            size:50,5
+                            pos_hint:{'center_x':.3}
+                FloatLayout:
+                    MDCard:
+                        orientation:'vertical'
+                        size_hint:None,None
+                        size:40,50
+                        pos:10,70
+                        elevation:6
+                        MDFillRoundFlatButton:
+                            text:"back"
+                            size_hint_y:1
+                            size_hint_x:1
+                            on_release:
+                                app.root.current='Main'
+                                root.manager.transition.direction='right'
+        MDBottomAppBar:
+            MDToolbar:
+                mode: "end"
+                type: "bottom"
+                icon: "credit-card"
+                on_action_button: root.manager.current = "Payment"
+<PaymentWindow>:
+    name:'Payment'
+    Image:
+        source:'payment.jpg'
+        allow_stretch:True
+        keep_ratio:False
+    BoxLayout:
+        MDRoundFlatButton:
+            text: 'Back'
+            icon_right:'back-arrow'
+            pos_hint:{'center_y':.97}
+            on_release:
+                app.root.current='Gross'
+                root.manager.transition.direction='left'
+        MDTextField:
+            id:feed_back
+            font_size:18
+            hint_text:'FeedBack'
+            helper_text_mode:'on_focus'
+            size_hint:None,None
+            size:200,200
+            valign:'top'
+    MDCard:
+        size_hint:None,None
+        size:300,480
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        elevation:10
+        padding:25
+        spacing:25
+        orientation:'vertical'
+        MDLabel:
+            text:"'WALMART' Payment"
+            font_size:40
+            font_name:'Auto Rich.ttf'  
+            halign:'center'
+            size_hint_y:None   
+            height:self.texture_size[1]
+        MDTextField:
+            id:Name
+            hint_text:'Name'
+            helper_text_mode:'on_focus'
+            icon_right:'account'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2
+            pos:root.width/3,root.height/2
+        MDTextField:
+            id:cvc
+            hint_text:'cvc'
+            helper_text_mode:'on_focus'
+            icon_right:'credit-card'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2.3
+        MDTextField:
+            id:Pin
+            hint_text:'pin'
+            helper_text_mode:'on_focus'
+            icon_right:'eye-off'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2.6
+        MDTextField:
+            id:Date
+            hint_text:'Exp Date'
+            helper_text_mode:'on_focus'
+            icon_right:'date'
+            size_hint:None,None
+            multiline: False
+            size:'250dp','30dp'
+            pos:root.width/3,root.height/2.9
+        MDRoundFlatButton:
+            text: 'confirm order'
+            font_size:18
+            pos_hint:{'center_x':0.5}
+            size:'100dp','50dp'
+            on_state:
+                if bool(root.Payment_func(Name.text)):\
+                root.manager.transition.direction='right';\
+                app.root.current="Login"
